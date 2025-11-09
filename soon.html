@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopEasy Product Card</title>
+<style>
+
+
+body {
+  background-color: #f4f7fa;
+  font-family: Arial, sans-serif;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+.container {
+  width: 400px;
+  background-color: #fff;
+  border: 3px solid #333;
+  border-radius: 10px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #fff;
+  background-color: #111;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 24px;
+}
+
+.product {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 15px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.product img {
+  width: 200px;
+  height: 150px;
+  border: 4px solid #f4f4f4;
+  border-radius: 4px;
+}
+
+.product h2 {
+  color: #000;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.product p {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.price {
+  color: #0b9b57;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.old-price {
+  color: #888;
+  text-decoration: line-through;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>ShopEasy</h1>
+  <div class="product">
+    <img src="data:image/jpeg;base64,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" alt="T-shirt">
+    <h2>Classic Cotton T-Shirt</h2>
+    <p>Soft, breathable cotton. Regular fit. Available in multiple colors.</p>
+    <span class="price">₹799</span>
+    <span class="old-price">₹1,199</span>
+    <br><br>
+    <button>Add to Cart</button>
+  </div>
+</div>
+
+</body>
+</html>
