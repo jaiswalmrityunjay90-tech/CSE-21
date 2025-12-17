@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CSS Box Model Demo</title>
+  <style>
+    
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: #f6f7f900;
+      margin: 0;
+      padding: 40px;
+      color: #222;
+    }
+
+    .wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .title {
+      margin-bottom: 20px;
+      font-size: 1.75rem;
+      font-weight: 700;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    
+    .label {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #111;
+    }
+    .label.margin { background: #ff8e5a; }   
+    .label.border { background: #438eff; }   
+    .label.padding { background: #ffd94a; }  
+    .label.content { background: #3ab8c6; }  
+
+    
+    .card {
+      margin: 24px;                
+      border: 16px solid #ff4343;  
+      padding: 24px;               
+      background: #ffd84a00;         
+    }
+
+    .card .content {
+      background: #3ac66e;        
+      color: #072b12;
+      padding: 16px;
+      border-radius: 8px;
+      box-shadow: inset 0 0 0 2px rgba(0,0,0,0.08);
+    }
+
+    
+    .explain {
+      background: rgb(180, 102, 102);
+      border: 1px solid #e6e8eb;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .explain h2 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+    }
+    .explain ul {
+      margin: 0;
+      padding-left: 18px;
+      line-height: 1.6;
+    }
+    .explain code {
+      background: #f0f2f4;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+
+    
+    .margin-visual {
+      background: rgba(255, 90, 90, 0); 
+      padding: 8px; 
+      border-radius: 10px;
+    }
+
+    @media (max-width: 820px) {
+      .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <div class="row">
+      
+      <div class="margin-visual">
+        <span class="label margin">Margin</span>
+        <div class="card">
+          <span class="label border">Border</span>
+          <div class="content">
+            <span class="label padding">Padding</span>
+            <p><span class="label content">Content</span></p>
+            
+             

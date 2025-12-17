@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flipkart-style UI | HTML & CSS only</title>
+  <style>
+    :root{
+      --brand:#2874f0;
+      --brand-dark:#1f5fd1;
+      --accent:#ff9f00;
+      --bg:#f1f2f4;
+      --text:#212121;
+      --muted:#878787;
+      --card:#ffffff;
+      --success:#388e3c;
+      --border:#e0e0e0;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+
+    /* Header */
+    header{
+      position:sticky;top:0;z-index:50;
+      background:var(--brand);color:#fff;
+      box-shadow:0 2px 8px rgba(0,0,0,.08);
+    }
+    .topbar{
+      max-width:1200px;margin:0 auto;padding:10px 16px;
+      display:flex;gap:12px;align-items:center;
+    }
+    .logo{
+      font-weight:800;font-size:20px;letter-spacing:.2px;
+      display:flex;align-items:center;gap:6px;
+    }
+    .logo .tagline{font-size:11px;color:#cfe0ff}
+    .search{
+      flex:1;display:flex;align-items:center;
+      background:#fff;border-radius:4px;overflow:hidden;
+    }
+    .search input{
+      flex:1;border:none;outline:none;padding:10px 12px;font-size:14px;
+    }
+    .search .btn-search{
+      background:var(--brand-dark);color:#fff;border:none;
+      padding:10px 14px;font-weight:600;
+    }
+    .actions{display:flex;gap:14px;align-items:center}
+    .btn{
+      background:#fff;color:var(--brand-dark);border:none;
+      padding:8px 12px;border-radius:4px;font-weight:600;
+    }
+    .cart{
+      display:flex;align-items:center;gap:6px;font-weight:600;
+    }
+
+    /* Category bar */
+    .categories{
+      background:#fff;border-top:1px solid rgba(255,255,255,.2);
+    }
+    .catbar{
+      max-width:1200px;margin:0 auto;padding:10px 8px;
+      display:grid;grid-template-columns:repeat(10,1fr);gap:8px;
+    }
+    .cat{
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+      padding:10px;border-radius:6px;transition:.2s;cursor:pointer;
+      border:1px solid transparent;
+    }
+    .cat:hover{background:#f8fbff;border-color:#e6f0ff}
+    .cat-icon{font-size:22px}
+    .cat-label{font-size:12px;color:#333;text-align:center}
+
+    /* Banner */
+    .banner{
+      max-width:1200px;margin:12px auto;padding:0 16px;
+    }
+    .banner .slider{
+      position:relative;border-radius:8px;overflow:hidden;
+      height:220px;background:linear-gradient(90deg,#fff,#eef6ff);
+      display:flex;align-items:center;justify-content:center;color:#0b3b8f;
+      font-weight:800;font-size:28px;letter-spacing:.4px;text-align:center;
+    }
+    .slider small{display:block;margin-top:8px;color:#1f5fd1;font-weight:600}
+
+    /* Content layout */
+    .content{
+      max-width:1200px;margin:12px auto;padding:0 16px;
+      display:grid;grid-template-columns:240px 1fr;gap:16px;
+    }
+    /* Left nav */
+    .left{display:flex;flex-direction:column;gap:12px}
+    .card{
+      background:var(--card);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.05);
+      border:1px solid var(--border);
+    }
+    .card h3{
+      margin:0;padding:12px 14px;border-bottom:1px solid var(--border);font-size:15px;
+    }
+    .filters{padding:12px 14px;display:flex;flex-direction:column;gap:10px}
+    .filter-item{display:flex;align-items:center;gap:8px;font-size:14px}
+    .price-range{display:flex;gap:8px}
+    .price-range input{width:100%;padding:8px;border:1px solid var(--border);border-radius:6px}
+
+    /* Right column */
+    .right{display:flex;flex-direction:column;gap:16px}
+
+    /* Product grid */
+    .grid{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+    }
+    .product{
+      background:#fff;border:1px solid var(--border);border-radius:8px;
+      overflow:hidden;display:flex;flex-direction:column;transition:.2s;
+    }
+    .product:hover{box-shadow:0 4px 18px rgba(0,0,0,.08);transform:translateY(-2px)}
+    .thumb{
+      height:160px;background:#fafafa;display:flex;align-items:center;justify-content:center;
+      font-size:48px
+    }
+    .info{padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+    .title{font-size:14px;font-weight:600;line-height:1.3}
+    .meta{font-size:12px;color:var(--muted)}
+    .rating{display:flex;align-items:center;gap:6px}
+    .badge{
+      background:var(--success);color:#fff;border-radius:4px;padding:2px 6px;font-size:12px;font-weight:700
+    }
+    .price-row{display:flex;align-items:center;gap:8px}
+    .price{font-size:16px;font-weight:800}
+    .strike{font-size:12px;color:var(--muted);text-decoration:line-through}
+    .offer{font-size:12px;color:var(--success);font-weight:700}
+    .cta-row{margin-top:6px;display:flex;gap:8px}
+    .btn-add{flex:1;background:var(--accent);color:#fff;border:none;padding:8px;border-radius:6px;font-weight:700}
+    .btn-buy{flex:1;background:var(--brand-dark);color:#fff;border:none;padding:8px;border-radius:6px;font-weight:700}
+
+    /* Collections row */
+    .collections{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    }
+    .collection-tile{
+      min-height:160px;background:#fff;border:1px solid var(--border);border-radius:8px;
+      overflow:hidden;padding:16px;display:flex;flex-direction:column;justify-content:space-between
+    }
+    .collection-title{font-weight:800;font-size:18px}
+    .collection-cta{align-self:flex-start;background:#0b3b8f;color:#fff;padding:8px 12px;border-radius:6px;font-weight:700;border:none}
+
+    /* Footer */
+    footer{
+      background:#0f2a54;color:#cfe0ff;margin-top:28px
+    }
+    .footer-inner{
+      max-width:1200px;margin:0 auto;padding:24px 16px;
+      display:grid;grid-template-columns:repeat(4,1fr);gap:16px
+    }
+    .ft h4{margin:0 0 8px;font-size:14px;color:#fff}
+    .ft a{display:block;color:#cfe0ff;margin:6px 0;font-size:13px}
+    .copyright{
+      max-width:1200px;margin:0 auto;padding:12px 16px;border-top:1px solid rgba(255,255,255,.15);
+      font-size:12px;color:#a9c6ff
+    }
+
+    /* Responsive */
+    @media (max-width:1024px){
+      .grid{grid-template-columns:repeat(3,1fr)}
+      .catbar{grid-template-columns:repeat(8,1fr)}
+    }
+    @media (max-width:768px){
+      .content{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      .catbar{grid-template-columns:repeat(5,1fr)}
+      .actions .btn{display:none}
+    }
+    @media (max-width:480px){
+      .grid{grid-template-columns:1fr}
+      .catbar{grid-template-columns:repeat(4,1fr)}
+      .banner .slider{height:160px;font-size:22px}
+      .logo{font-size:18px}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="topbar">
+      <div class="logo">
+        🛒 Flipkart
+        <span class="tagline">Explore Plus</span>
+      </div>
+      <div class="search">
+        <input type="search" placeholder="Search for Products, Brands and More" />
+        <button class="btn-search" type="button">Search</button>
+      </div>
+      <div class="actions">
+        <button class="btn" type="button">Login</button>
+        <a class="cart" href="#">
+          🧺 <span>Cart</span>
+        </a>
+      </div>
+    </div>
+    <nav class="categories">
+      <div class="catbar">
+        <div class="cat"><div class="cat-icon">📱</div><div class="cat-label">Mobiles</div></div>
+        <div class="cat"><div class="cat-icon">🖥️</div><div class="cat-label">Electronics</div></div>
+        <div class="cat"><div class="cat-icon">👕</div><div class="cat-label">Fashion</div></div>
+        <div class="cat"><div class="cat-icon">🏠</div><div class="cat-label">Home</div></div>
+        <div class="cat"><div class="cat-icon">🛋️</div><div class="cat-label">Furniture</div></div>
+        <div class="cat"><div class="cat-icon">🍳</div><div class="cat-label">Appliances</div></div>
+        <div class="cat"><div class="cat-icon">🎮</div><div class="cat-label">Gaming</div></div>
+        <div class="cat"><div class="cat-icon">🚲</div><div class="cat-label">Travel</div></div>
+        <div class="cat"><div class="cat-icon">🧴</div><div class="cat-label">Beauty</div></div>
+        <div class="cat"><div class="cat-icon">📚</div><div class="cat-label">Books</div></div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Banner -->
+  <section class="banner">
+    <div class="slider">
+      Big Billion Days — Flat 50–80% Off
+      <small>Limited time · Best deals on top brands</small>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <main class="content">
+    <!-- Left filters -->
+    <aside class="left">
+      <div class="card">
+        <h3>Filters</h3>
+        <div class="filters">
+          <label class="filter-item">
+            <input type="checkbox" /> Flipkart Assured
+          </label>
+          <label class="filter-item">
+            <input type="checkbox" /> Free Shipping
+          </label>
+          <label class="filter-item">
+            <input type="checkbox" /> Cash on Delivery
+          </label>
+          <div class="filter-item"><strong>Price range:</strong></div>
+          <div class="price-range">
+            <input type="number" placeholder="Min ₹" />
+            <input type="number" placeholder="Max ₹" />
+          </div>
+          <button class="btn" type="button">Apply filters</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Categories</h3>
+        <div class="filters">
+          <button class="btn" type="button">Mobiles</button>
+          <button class="btn" type="button">Electronics</button>
+          <button class="btn" type="button">Fashion</button>
+          <button class="btn" type="button">Home</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right products -->
+    <section class="right">
+      <div class="card">
+        <h3>Best of Electronics</h3>
+        <div class="grid">
+          <!-- Sample product cards -->
+          <article class="product">
+            <div class="thumb">📱</div>
+            <div class="info">
+              <div class="title">Smartphone X (128 GB, 5G)</div>
+              <div class="meta">BrandX · 1 year warranty</div>
+              <div class="rating">
+                <span class="badge">4.3 ★</span>
+                <span class="meta">12,842 ratings</span>
+              </div>
+              <div class="price-row">
+                <span class="price">₹14,999</span>
+                <span class="strike">₹19,999</span>
+                <span class="offer">25% off</span>
+              </div>
+              <div class="cta-row">
+                <button class="btn-add" type="button">Add to cart</button>
+                <button class="btn-buy" type="button">Buy now</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="thumb">🎧</div>
+            <div class="info">
+              <div class="title">Wireless Headphones Pro</div>
+              <div class="meta">Noise cancel · 30h battery</div>
+              <div class="rating">
+                <span class="badge">4.6 ★</span>
+                <span class="meta">8,203 ratings</span>
+              </div>
+              <div class="price-row">
+                <span class="price">₹2,999</span>
+                <span class="strike">₹4,499</span>
+                <span class="offer">33% off</span>
+              </div>
+              <div class="cta-row">
+                <button class="btn-add" type="button">Add to cart</button>
+                <button class="btn-buy" type="button">Buy now</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="thumb">💻</div>
+            <div class="info">
+              <div class="title">Ultra Laptop 14" (i5, 16GB)</div>
+              <div class="meta">Backlit · 512GB SSD</div>
+              <div class="rating">
+                <span class="badge">4.4 ★</span>
+                <span class="meta">2,104 ratings</span>
+              </div>
+              <div class="price-row">
+                <span class="price">₹54,990</span>
+                <span class="strike">₹62,990</span>
+                <span class="offer">13% off</span>
+              </div>
+              <div class="cta-row">
+                <button class="btn-add" type="button">Add to cart</button>
+                <button class="btn-buy" type="button">Buy now</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="product">
+            <div class="thumb">⌚</div>
+            <div class="info">
+              <div class="title">Smartwatch Active</div>
+              <div class="meta">SpO₂ · GPS · 7-day battery</div>
+              <div class="rating">
+                <span class="badge">4.1 ★</span>
+                <span class="meta">15,987 ratings</span>
+              </div>
+              <div class="price-row">
+                <span class="price">₹1,799</span>
+                <span class="strike">₹2,499</span>
+                <span class="offer">28% off</span>
+              </div>
+              <div class="cta-row">
+                <button class="btn-add" type="button">Add to cart</button>
+                <button class="btn-buy" type="button">Buy now</button>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="collections">
+        <div class="collection-tile">
+          <div class="collection-title">Top deals on TVs</div>
+          <div>Starting ₹12,999</div>
+          <button class="collection-cta" type="button">View all</button>
+        </div>
+        <div class="collection-tile">
+          <div class="collection-title">Kitchen essentials</div>
+          <div>Up to 70% off</div>
+          <button class="collection-cta" type="button">Shop now</button>
+        </div>
+        <div class="collection-tile">
+          <div class="collection-title">Monitors & accessories</div>
+          <div>Great offers</div>
+          <button class="collection-cta" type="button">Explore</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="ft">
+        <h4>About</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Flipkart Stories</a>
+      </div>
+      <div class="ft">
+        <h4>Help</h4>
+        <a href="#">Payments</a>
+        <a href="#">Shipping</a>
+        <a href="#">Cancellation & Returns</a>
+      </div>
+      <div class="ft">
+        <h4>Policy</h4>
+        <a href="#">Return Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Security</a>
+      </div>
+      <div class="ft">
+        <h4>Social</h4>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 Flipkart-style UI. HTML & CSS only by mrityumjay jaiswal
+    </div>
+  </footer>
+
+</body>
+</html>
