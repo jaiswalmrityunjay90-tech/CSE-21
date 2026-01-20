@@ -1,156 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>amazone</title>
+    <title>Amazon Clone</title>
+
     <style>
         * {
-    margin: 0;
-    font-family: arial;
-    border: border-box;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
-        .navbar{
-            height: 60px;
-            background-color: #131921;
-            display: flex;
-            color: white;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-        .nav-logo{
-            height;50px;
-        }
-        .logo{
-            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7ZoPxHxiJ8nsrZTejjkVOIWcBlJt1D0KhLQ&s" );
-            height: 50px;
-            width: 100px; 
-        }
-        .border{
-            border: 2px solid transparent white;
-        }
-        .border:hover{
-            border: 2px solid white;
-        }
-        /** box2 **/
-        .add-first{
-            color:#cccccc;
-            font-size: .8rem;
-            margin-left: 15px; 
-        }
-        .add-second{
-            font-size: 1rem;
-            margin-left: 3px;
-        }
-        .add-icon{
-            display: flex;
-            align-items: center;
-        }
-        /** box3 **/
-        .nav-search{
-            display: flex;
-            background-color: wheat;
-            width:620px ;
-            height: 40px;
-            border-radius: 4px;
-           
-        }
-        .search-select{
-            background-color: #f3f3f3;
-            width: 50px;
-            text-align: center;
-            border-top-left-radius: 4px
-            border-bottom-left-radius: 4px;
-            border: none;
-            justify-content: space-evenly; 
-        }
-        .search-input{
-           width: 100%; 
-           font-size: 1rem;
-           border: none;
-             
-        }
-        .search-icon{
-            background-color: #febd69;
-            width: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2rem;
-            border-top-right-radius: 4px;
-            border-bottom-right-radius: 4px;
-             color: #febd69;
 
+        body {
+            background-color: #e3e6e6;
         }
-        .nav-search:hover{
-            background-color: #f3a847;
-            
+
+        .navbar {
+            height: 65px;
+            background-color: #115151;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            color: white;
         }
-        /** box4 and box5 **/   
-        .span{
-            font-size: .7rem;
+
+        .nav-left,
+        .nav-center,
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
-        .nav-second{
-            font-size: .85rem;
-            font-weight: 700;    
+
+        .logo {
+            background-image: url("image.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            height: 45px;
+            width: 100px;
         }
-        /** box6 **/
-        .nav-cart i{
-            font-size: 30px;
+
+        .nav-address {
+            display: flex;
+            flex-direction: column;
+            font-size: 0.8rem;
+            cursor: pointer;
         }
-        .nav-cart{
+
+        .nav-address span {
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .nav-search {
+            display: flex;
+            width: 420px;
+            height: 40px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .search-select {
+            width: 55px;
+            border: none;
+            background-color: #f3f3f3;
+        }
+
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 0 10px;
+            font-size: 1rem;
+        }
+
+        .search-icon {
+            width: 45px;
+            background-color: #febd69;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #111;
+        }
+
+        .nav-item {
             font-size: 0.85rem;
-            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .nav-item strong {
+            display: block;
+            font-size: 0.95rem;
+        }
+
+        .panel {
+            width: 100%;
+            justify-content: space-evenly;
+            height: 40px;
+            background-color: #232f3e;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            color: white;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .panel p {
+            cursor: pointer;
+        }
+
+        .hero-section {
+            height: 380px;
+            background-image: url("https://images-eu.ssl-images-amazon.com/images/G/31/sudipta/GW/BAU/low_1._CB777991903_.jpg");
+            background-size: cover;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hero-msg {
+            background-color: white;
+            padding: 12px;
+            margin-bottom: 30px;
+            width: 95%;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .hero-msg a {
+            color: #007185;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .shop-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+
+        .product-card {
+            background-color: white;
+            padding: 20px;
+            border-radius: 6px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card h3 {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .shop-link {
+            color: #007185;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        footer {
+            margin-top: 30px;
+        }
+
+        .foot-panel1 {
+            background-color: #37475a;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.85rem;
+        }
+
+        .foot-panel2 {
+            background-color: #232f3e;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 30px;
+            flex-wrap: wrap;
+        }
+
+        .foot-panel2 ul {
+            list-style: none;
+        }
+
+        .foot-panel2 p {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .foot-panel2 a {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .foot-panel3 {
+            background-color: #131a22;
+            height: 60px;
         }
     </style>
 </head>
+
 <body>
+
     <div class="navbar">
-        <div class="nav-logo border">
+        <div class="nav-left">
             <div class="logo"></div>
-        </div>
-            <div class="nav-address border"> 
-                <p class=" add-first" >Deliver to</p>
-                <div class="add-icon">
-                  <i class="fa-solid fa-location-dot"></i>
-                    <p class="add-sec">India</p>
-                </div>
+            <div class="nav-address">
+                <div>📍 Deliver to</div>
+                <span>India</span>
             </div>
-            <div class="nav-search border">
+        </div>
+
+        <div class="nav-center">
+            <div class="nav-search">
                 <select class="search-select">
                     <option>All</option>
                 </select>
-                <input placeholder="Search Amazon" clss="search-input">
-                <div class="search-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </div>
+                <input class="search-input" placeholder="Search Amazon">
+                <div class="search-icon">🔍</div>
             </div>
-             <div class="nav-signin border">
-                    <p><span>Hello, Sign in</span></p>
-                    <p class="nav-second">Account & Lists</p>
-                </div>
-                <div class="nav-return border">
-                    <p><span>Hello, Sign in</span></p>
-                    <p class="nav-second">& Orders</p>
-                </div>
-                <div class="nav-return border">
-                    <p><span>Returns</span></p>
-                    <p class="nav-second">& Orders</p>
-                </div>
-                <div class="nav-cart border">
-                  <i class="fa-regular fa-cart-plus"></i>
-                   cart
-                </div>
-                <div class=" panel-deal">
-                    <p>Today's Deals</p>  
-                    <p>costomer service</p>
-                    <p> Registery</p>
-                    <p>Gift Cards</p>
-                    <p>Sell</p>
-                </div>
-                <div class=" panel-deals">
-                    <p>Shop deals in electronic</p>  
-                    </div>
-    
+        </div>
+
+        <div class="nav-right">
+            <div class="nav-item">Hello, Sign in<strong>Account & Lists</strong></div>
+            <div class="nav-item">Returns<strong>& Orders</strong></div>
+            <div class="nav-item">🛒 Cart</div>
+        </div>
+    </div>
+
+    <div class="panel">
+        <p>All</p>
+        <p>Today's Deals</p>
+        <p>Customer Service</p>
+        <p>Gift Cards</p>
+        <p>Sell</p>
+    </div>
+
+    <div class="hero-section">
+        <div class="hero-msg">
+            Up to 40% off | Electronics clearance store
+            <a>Click here to go to amazon.in</a>
+        </div>
+    </div>
+
+    <div class="shop-section">
+        <div class="product-card">
+            <h3>Health & Personal Care</h3>
+            <img src="https://cdn.shopify.com/s/files/1/0646/1551/4330/files/Importance_of_Personal_Care_Products_480x480.webp?v=1673811372">
+            <div class="shop-link">Shop Now</div>
+        </div>
+
+        <div class="product-card">
+            <h3>Electronics</h3>
+            <img src="https://m.media-amazon.com/images/I/61CGHv6kmWL._SX679_.jpg">
+            <div class="shop-link">Shop Now</div>
+        </div>
+
+        <div class="product-card">
+            <h3>Home Essentials</h3>
+            <img src="https://m.media-amazon.com/images/I/71Zf9uUp+GL._SX679_.jpg">
+            <div class="shop-link">Shop Now</div>
+        </div>
+
+        <div class="product-card">
+            <h3>Fashion</h3>
+            <img src="https://m.media-amazon.com/images/I/71ZDY57yTQL._SX679_.jpg">
+            <div class="shop-link">Shop Now</div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="foot-panel1">Back to Top</div>
+
+        <div class="foot-panel2">
+            <ul>
+                <p>Get to Know Us</p>
+                <a>Careers</a>
+                <a>Blog</a>
+                <a>About Amazon</a>
+            </ul>
+
+            <ul>
+                <p>Make Money with Us</p>
+                <a>Sell on Amazon</a>
+                <a>Affiliate</a>
+                <a>Advertise</a>
+            </ul>
+
+            <ul>
+                <p>Help</p>
+                <a>Your Account</a>
+                <a>Returns</a>
+                <a>Support</a>
+            </ul>
+        </div>
+
+        <div class="foot-panel3"></div>
+    </footer>
+
 </body>
+
 </html>
